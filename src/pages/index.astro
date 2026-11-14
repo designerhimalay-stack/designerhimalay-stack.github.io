@@ -12,6 +12,8 @@ import { Azure } from "../components/site/Azure";
 import { CTA } from "../components/site/CTA";
 import { Dynamics } from "../components/site/Dynamics";
 import { GlobalPresence } from "../components/site/GlobalPresence";
+import { IndiaHub } from "../components/site/IndiaHub";
+import { UaeHub } from "../components/site/UaeHub";
 import { REGION } from "../brand/regions";
 import { Hero } from "../components/site/Hero";
 import { Microsoft } from "../components/site/Microsoft";
@@ -37,6 +39,8 @@ const description = "AptaCloud modernises the systems mid-sized insurance, oil a
     <Microsoft client:visible />
     <Azure client:visible />
     {REGION.id === "us" && <GlobalPresence client:visible />}
+    {REGION.id === "in" && <IndiaHub client:visible />}
+    {REGION.id === "uae" && <UaeHub client:visible />}
     <CTA client:idle />
   </main>
   <Footer />

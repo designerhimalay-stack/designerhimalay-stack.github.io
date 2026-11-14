@@ -11,7 +11,7 @@
 
 import { motion, useScroll, useTransform, type MotionValue } from "@/lib/motion";
 import { Fragment, useRef, useState, type FormEvent } from "react";
-import { BRAND, PRIMARY_CTA } from "@/brand/brand";
+import { BRAND, PRIMARY_CTA, whatsappHref } from "@/brand/brand";
 import { NEXT_STEPS } from "@/data/services/shared";
 import { Reveal } from "@/components/ui/Reveal";
 import { RollingText } from "@/components/ui/RollingText";
@@ -118,6 +118,16 @@ function PinIcon() {
     <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
       <path d="M10 17.25s5.25-4.6 5.25-9a5.25 5.25 0 0 0-10.5 0c0 4.4 5.25 9 5.25 9Z" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round" />
       <circle cx="10" cy="8.25" r="1.9" stroke="currentColor" strokeWidth="1.25" />
+    </svg>
+  );
+}
+
+/** Chat bubble (line icon, matching the row set) for the WhatsApp row. */
+function ChatIcon() {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M10 3.25a6.75 6.75 0 0 0-5.85 10.12l-.9 3.38 3.45-.9A6.75 6.75 0 1 0 10 3.25Z" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round" />
+      <path d="M7.6 7.4c.15 2.2 2.8 4.85 5 5l.9-1.15-1.6-.8-.65.65c-.8-.35-1.6-1.15-1.95-1.95l.65-.65-.8-1.6-1.15.9Z" stroke="currentColor" strokeWidth="1" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -300,6 +310,17 @@ export function CTA({
                     </a>
                   </li>
                 ))}
+                {BRAND.contact.whatsapp && (
+                  <li>
+                    <a href={whatsappHref(BRAND.contact.whatsapp)} className={s.row} target="_blank" rel="noopener">
+                      <span className={s.rowIcon}>
+                        <ChatIcon />
+                      </span>
+                      <span className={s.rowValue}>Chat on WhatsApp</span>
+                      <RowArrow />
+                    </a>
+                  </li>
+                )}
                 <li>
                   <a href={`mailto:${BRAND.contact.email}`} className={s.row}>
                     <span className={s.rowIcon}>

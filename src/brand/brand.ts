@@ -13,6 +13,7 @@ export const BRAND = {
   tagline: "Your Path to Measurable AI ROI",
   /** One-line value proposition (Brand Guidelines v2.0, 3.2), Australian spelling. */
   valueProp:
+    REGION.valueProp ??
     "AptaCloud modernises the systems mid-sized insurance, oil & gas, and construction firms run on, and puts AI to work on top of them. We prove it on your data first.",
   location: REGION.location,
 

@@ -5,43 +5,18 @@
 // link to that site. The card for the site you are on says so instead.
 // Phones: a 2×2 grid, copy clamped to two lines with Read more.
 
-import { motion, useScroll, useTransform, type MotionValue } from "@/lib/motion";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { asset } from "@/brand/brand";
 import { REGION, REGIONS, REGION_ORDER, regionHome } from "@/brand/regions";
 import { Reveal } from "@/components/ui/Reveal";
 import { ReadMore } from "@/components/ui/ReadMore";
 import { cn } from "@/lib/utils";
+import { HomeHead } from "./HomeHead";
 import s from "./GlobalPresence.module.css";
 
 const HEADING = "Headquartered in Texas. Working across four regions.";
 const LEAD =
   "One team and one way of working, led by Microsoft specialists. Delivery runs from the United States, Mexico, and India, with a dedicated site for each region we serve.";
-
-function Word({ word, i, n, progress }: { word: string; i: number; n: number; progress: MotionValue<number> }) {
-  const color = useTransform(progress, [i / n, (i + 1) / n], ["var(--fill-from)", "var(--fill-to)"]);
-  return (
-    <motion.span className={s.word} style={{ color }}>
-      {word}
-    </motion.span>
-  );
-}
-
-/** Words fill from grey to ink as the heading scrolls through the viewport. */
-function FillHeading({ text }: { text: string }) {
-  const ref = useRef<HTMLHeadingElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.95", "end 0.7"] });
-  const words = text.split(" ");
-  return (
-    <h2 ref={ref} className={s.heading} aria-label={text}>
-      {words.map((w, i) => (
-        <Fragment key={i}>
-          <Word word={w} i={i} n={words.length} progress={scrollYProgress} />{" "}
-        </Fragment>
-      ))}
-    </h2>
-  );
-}
 
 function useNow() {
   const [now, setNow] = useState<Date | null>(null);
@@ -56,9 +31,9 @@ function useNow() {
 const timeIn = (d: Date, timeZone: string) =>
   d.toLocaleTimeString(REGION.lang, { hour: "numeric", minute: "2-digit", timeZone }).replace(/\s?(am|pm)/i, (m) => ` ${m.trim().toLowerCase()}`);
 
-function GlobeIcon({ className }: { className?: string }) {
+function GlobeIcon() {
   return (
-    <svg className={className} viewBox="0 0 20 20" fill="none" aria-hidden="true">
+    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
       <circle cx="10" cy="10" r="7.25" stroke="currentColor" strokeWidth="1.25" />
       <path d="M2.75 10h14.5M10 2.75c2 2.1 3 4.5 3 7.25s-1 5.15-3 7.25c-2-2.1-3-4.5-3-7.25s1-5.15 3-7.25Z" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round" />
     </svg>
@@ -78,20 +53,7 @@ export function GlobalPresence() {
   return (
     <section id="global-presence" data-theme="light" className={s.section}>
       <div className={s.container}>
-        <div className={s.content}>
-          <Reveal y={30} duration={1} amount={0.3} className={s.tagCol}>
-            <p className={s.tag}>
-              <GlobeIcon className={s.tagIcon} />
-              <span>Global presence</span>
-            </p>
-          </Reveal>
-          <div className={s.copy}>
-            <FillHeading text={HEADING} />
-            <Reveal y={30} duration={1} delay={0.1} amount={0.3}>
-              <p className={s.lead}>{LEAD}</p>
-            </Reveal>
-          </div>
-        </div>
+        <HomeHead tag="Global presence" icon={<GlobeIcon />} heading={HEADING} lead={LEAD} />
 
         <div className={s.grid}>
           {REGION_ORDER.map((id, i) => {
