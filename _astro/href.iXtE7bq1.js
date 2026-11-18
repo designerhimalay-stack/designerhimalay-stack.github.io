@@ -1,1 +1,0 @@
-import{i as e}from"./brand.BpHTWvzi.js";var t=t=>e(`/${t}/`);export{t};
