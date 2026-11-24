@@ -1,1 +1,0 @@
-import{i as e}from"./brand.B4W6-oag.js";var t=t=>e(`/${t}/`);export{t};

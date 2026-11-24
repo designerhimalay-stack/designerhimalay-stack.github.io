@@ -1,0 +1,1 @@
+import{i as e}from"./brand.DzDVGIa4.js";var t=t=>e(`/${t}/`);export{t};
